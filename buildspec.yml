@@ -1,0 +1,16 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin <account-id>.dkr.ecr.us-east-1.amazonaws.com
+  build:
+    commands:
+      - echo Build the Docker image...
+      - docker build -t client-repo .
+      - docker tag client-repo:latest <account-id>.dkr.ecr.us-east-1.amazonaws.com/client-repo:latest
+  post_build:
+    commands:
+      - echo Pushing the Docker image...
+      - docker push <account-id>.dkr.ecr.us-east-1.amazonaws.com/client-repo:latest
