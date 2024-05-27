@@ -2,21 +2,21 @@ import React, { useState } from 'react';
 import BattleForm from './components/BattleForm';
 import './App.css';
 import { SERVER_URL } from './config/config';
+import {exec} from "node:child_process";
 
 function App() {
     const [result, setResult] = useState<string>('');
 
     const calculateProbability = (attacker: any, defender: any) => {
-        fetch(`${SERVER_URL}/calculate`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ attack: attacker, defender: defender }),
-        })
-            .then((response) => response.text())
-            .then((data) => setResult(data))
-            .catch((error) => console.error('Error:', error));
+        //execute the python script to calculate the probability analyse/battle-calculator.py
+        exec(`python analyse/battle-calculator.py ${attacker}${defender}`, (error, stdout, stderr) => {
+            if (error) {
+                console.error(`exec error: ${error}`);
+                return;
+            }
+            console.log(`stdout: ${stdout}`);
+            setResult(stdout);
+        });
     };
 
     return (
