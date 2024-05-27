@@ -1,0 +1,37 @@
+.field-group {
+    margin-bottom: 15px;
+}
+
+.field-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.field-group input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+.field-group button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.field-group button:hover {
+    background-color: #218838;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.9em;
+    display: none;
+}
+
+.section {
+    margin-bottom: 20px;
+}

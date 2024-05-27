@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  calculation-client:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: calculation-client
+    ports:
+      - "3000:80"
+    restart: always
+
